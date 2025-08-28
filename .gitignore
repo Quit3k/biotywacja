@@ -1,0 +1,22 @@
+# Zależności (bardzo duże foldery)
+/node_modules
+
+# Cache i build Next.js
+/.next/
+/out/
+
+# Sanity Studio (ignorujemy CAŁY folder, aby rozwiązać problem)
+/studio/
+
+# Pliki logów i systemowe
+npm-debug.log*
+yarn-error.log*
+.DS_Store
+
+# Pliki środowiskowe (BARDZO WAŻNE DLA BEZPIECZEŃSTWA)
+.env.local
+.env.development.local
+.env.production.local
+
+# Pliki generowane przez edytory
+.vscode/

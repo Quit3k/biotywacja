@@ -16,7 +16,7 @@ const RegulaminPage = () => {
 
       <h2>§ 2. Informacje kontaktowe</h2>
       <p>
-        kontakt: <strong>kontakt@biotywacja.pl</strong>
+        kontakt: <strong>biotywacja@gmail.com</strong>
       </p>
 
     </LegalWrapper>

@@ -1,0 +1,36 @@
+.legalWrapper {
+  max-width: 850px;
+  margin: 120px auto 80px auto; /* duży odstęp od nav + odstęp nad footerem */
+  padding: 0 20px;
+  color: #222;
+  line-height: 1.7;
+}
+
+.legalWrapper h1 {
+  font-size: 36px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: #3b82f6; /* pierwotny niebieski */
+  margin-bottom: 40px;
+}
+
+.legalWrapper h2 {
+  margin-top: 32px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.legalWrapper p {
+  margin-top: 12px;
+  font-size: 17px;
+}
+
+.legalWrapper ul {
+  margin-top: 12px;
+  padding-left: 20px;
+}
+
+.legalWrapper li {
+  margin-bottom: 6px;
+  list-style: disc;
+}

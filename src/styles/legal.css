@@ -1,0 +1,35 @@
+.legal-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding-top: 120px;   /* odstęp od nav */
+  padding-bottom: 120px; /* odstęp od footer */
+}
+
+.legal-wrapper h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-decoration: underline;
+  text-decoration-color: #3b82f6;
+}
+
+.legal-wrapper h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 40px;
+  margin-bottom: 12px;
+}
+
+.legal-wrapper p,
+.legal-wrapper li {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #374151; /* text-gray-700 */
+  margin-bottom: 16px;
+}
+
+.legal-wrapper ul {
+  margin-left: 24px;
+  list-style: disc;
+  margin-bottom: 16px;
+}

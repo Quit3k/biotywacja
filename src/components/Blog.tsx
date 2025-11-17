@@ -1,91 +1,176 @@
-// src/components/Blog.tsx
+// src/components/BlogSection.tsx
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Calendar, ArrowRight } from 'lucide-react';
+import { ArrowRight, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import sanityClient from '../sanityClient';
 
 interface Post {
   _id: string;
   title: string;
   slug: { current: string };
-  mainImage: { asset: { url: string } };
+  mainImage?: { asset: { url: string } };
+  body?: any[];
   publishedAt: string;
 }
 
 const BlogSection = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    sanityClient.fetch(`
-      *[_type == "post"] | order(publishedAt desc)[0...4] {
-        _id,
-        title,
-        slug,
-        mainImage{ asset->{url} },
-        publishedAt
-      }
-    `).then((data) => setPosts(data)).catch(console.error);
+    sanityClient
+      .fetch(`
+        *[_type == "post"] | order(publishedAt desc)[0...6] {
+          _id,
+          title,
+          slug,
+          mainImage{ asset->{url} },
+          body,
+          publishedAt
+        }
+      `)
+      .then((data) => setPosts(data))
+      .catch(console.error);
   }, []);
-
-  const latestPost = posts[0];
-  const otherPosts = posts.slice(1);
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' });
-  };
 
   if (posts.length === 0) return null;
 
+  const formatDate = (dateString: string) =>
+    new Date(dateString).toLocaleDateString('pl-PL', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+
+  const extractSnippet = (body: any[] | undefined) => {
+    if (!body || !Array.isArray(body)) return '';
+    const text = body
+      .filter((b) => b._type === 'block')
+      .map((b) => b.children.map((c: any) => c.text).join(''))
+      .join(' ');
+
+    return text.length > 200 ? text.slice(0, 200) + '…' : text;
+  };
+
+  const next = () => setIndex((prev) => (prev + 1) % posts.length);
+  const prev = () =>
+    setIndex((prev) => (prev - 1 + posts.length) % posts.length);
+
   return (
-    <section id="blog" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 font-poppins">
-            Ostatnio na Blogu
+    <section
+      id="blog"
+      className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden"
+    >
+      {/* TŁO & KÓŁKA */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg
+          className="absolute top-0 left-0 w-full h-32 opacity-10"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,0V46.29c47.79,22.2..."
+            fill="url(#waveBlog1)"
+          ></path>
+          <defs>
+            <linearGradient id="waveBlog1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.05" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div className="absolute top-20 left-20 w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 opacity-20 animate-float"></div>
+        <div className="absolute bottom-32 right-28 w-12 h-12 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-400 opacity-20 animate-float"></div>
+        <div className="absolute top-40 right-36 w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 opacity-20 animate-float"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* NAGŁÓWEK */}
+        <div className="text-center mb-20">
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 font-poppins leading-tight mb-4">
+            Najnowsze wpisy z{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-800">
+              Bloga
+            </span>
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
-            Garść wiedzy i inspiracji prosto od Biotywacji.
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+            Krótka dawka wiedzy, inspiracji i nauki. Oparte na psychologii,
+            neurobiologii i realnych doświadczeniach.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {latestPost && (
-            // ZMIANA: Usunięto <a> i przeniesiono propsy do <Link>
-            <Link href={`/blog/${latestPost.slug.current}`} className="group space-y-4">
-              <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
-                <Image src={latestPost.mainImage.asset.url} alt={latestPost.title} layout="fill" className="object-cover group-hover:scale-105 transition-transform duration-300" />
-              </div>
-              <div className="flex items-center text-gray-500 text-sm">
-                <Calendar className="h-4 w-4 mr-2" />
-                <span>{formatDate(latestPost.publishedAt)}</span>
-              </div>
-              <h3 className="text-3xl font-bold font-poppins text-gray-900 group-hover:text-primary-600 transition-colors">{latestPost.title}</h3>
-            </Link>
-          )}
+        {/* KARUZELA */}
+        <div className="relative w-full flex justify-center items-center">
+          {/* Strzałka lewa */}
+          <button
+            onClick={prev}
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-xl p-4 rounded-full hover:scale-110 transition"
+          >
+            <ChevronLeft className="w-6 h-6 text-gray-700" />
+          </button>
 
-          <div className="space-y-8">
-            {otherPosts.map(post => (
-              // ZMIANA: Usunięto <a> i przeniesiono propsy do <Link>
-              <Link key={post._id} href={`/blog/${post.slug.current}`} className="group grid grid-cols-3 gap-4 items-center">
-                <div className="relative h-24 rounded-lg overflow-hidden col-span-1 shadow-md">
-                  <Image src={post.mainImage.asset.url} alt={post.title} layout="fill" className="object-cover group-hover:scale-105 transition-transform duration-300" />
-                </div>
-                <div className="col-span-2">
-                  <div className="flex items-center text-gray-500 text-xs mb-1">
-                    <Calendar className="h-3 w-3 mr-1" />
-                    <span>{formatDate(post.publishedAt)}</span>
+          {/* KAFELKI */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
+            {[0, 1, 2].map((offset) => {
+              const post = posts[(index + offset) % posts.length];
+              const snippet = extractSnippet(post.body);
+
+              return (
+                <Link
+                  key={post._id}
+                  href={`/blog/${post.slug.current}`}
+                  className="group bg-white rounded-3xl shadow-2xl p-6 flex flex-col hover:shadow-3xl transition-all duration-300 hover:scale-[1.02]"
+                >
+                  <div className="relative h-48 w-full rounded-2xl overflow-hidden mb-6 shadow-lg">
+                    {post.mainImage?.asset?.url ? (
+                      <Image
+                        src={post.mainImage.asset.url}
+                        alt={post.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200"></div>
+                    )}
                   </div>
-                  <h4 className="text-lg font-bold font-poppins text-gray-900 group-hover:text-primary-600 transition-colors">{post.title}</h4>
-                </div>
-              </Link>
-            ))}
+
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    {post.title}
+                  </h3>
+
+                  <p className="text-gray-600 text-sm mb-4 flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    {formatDate(post.publishedAt)}
+                  </p>
+
+                  <p className="text-gray-700 text-base leading-relaxed mb-6">
+                    {snippet}
+                  </p>
+
+                  <span className="inline-block border border-primary-600 text-primary-600 px-6 py-3 rounded-full font-semibold text-sm group-hover:bg-primary-600 group-hover:text-white transition-all w-fit">
+                    Czytaj dalej
+                  </span>
+                </Link>
+              );
+            })}
           </div>
+
+          {/* Strzałka prawa */}
+          <button
+            onClick={next}
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-xl p-4 rounded-full hover:scale-110 transition"
+          >
+            <ChevronRight className="w-6 h-6 text-gray-700" />
+          </button>
         </div>
 
-        <div className="mt-16 text-center">
-          {/* ZMIANA: Usunięto <a> i przeniesiono propsy do <Link> */}
-          <Link href="/blog" className="group inline-block bg-gradient-to-r from-primary-600 to-purple-600 text-white px-10 py-5 rounded-full text-xl font-semibold hover:from-primary-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+        <div className="text-center mt-20">
+          <Link
+            href="/blog"
+            className="group inline-block bg-gradient-to-r from-primary-600 to-purple-600 text-white px-12 py-5 rounded-full text-xl font-semibold hover:from-primary-700 hover:to-purple-700 transition-all shadow-xl hover:scale-105"
+          >
             Zobacz wszystkie posty
             <ArrowRight className="inline-block ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
           </Link>

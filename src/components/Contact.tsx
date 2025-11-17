@@ -88,7 +88,7 @@ const Contact = () => {
             
             <div className="w-full text-center lg:text-left mt-8">
               <p className="text-xl text-gray-700 leading-relaxed max-w-md mx-auto lg:mx-0">
-                Hej tu Monika, osoba która tworzy Biotywację. Jeśli masz pytanie, chcesz się czymś podzielić lub napisać kilka słów to tu mnie znajdziesz:
+                Hej tu Monika, to ja tworzę Biotywację. Jeśli masz pytanie, chcesz się czymś podzielić lub napisać kilka słów to tu mnie znajdziesz:
               </p>
               
               <div className="w-full mt-8">
@@ -98,7 +98,7 @@ const Contact = () => {
                   </div>
                   <div className="text-left">
                     <h4 className="text-xl font-semibold text-gray-900">Email</h4>
-                    <p className="text-lg text-gray-600">kontakt@biotywacja.pl</p>
+                    <p className="text-lg text-gray-600">biotywacja@gmail.com</p>
                   </div>
                 </div>
               </div>

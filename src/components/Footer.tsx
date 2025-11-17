@@ -33,11 +33,11 @@ const Footer = () => {
               </h1>
             </Link>
             <p className="text-base max-w-xs">
-              Naukowe podejście do motywacji i rozwoju osobistego. Odkryj swój potencjał i transformuj życie.
+              Tworzę przestrzeń dla nauczycieli i uczniów, którzy chcą uczyć i uczyć się z sensem.
             </p>
           </div>
 
-          {/* Kolumna 2: Menu (pozostaje wyśrodkowana) */}
+          {/* Kolumna 2: Menu */}
           <div className="flex flex-col items-center">
             <h3 className="text-lg font-semibold text-white mb-4">Menu</h3>
             <ul className="space-y-2">
@@ -51,7 +51,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Kolumna 3: Dokumenty (pozostaje wyśrodkowana) */}
+          {/* Kolumna 3: Dokumenty */}
           <div className="flex flex-col items-center">
             <h3 className="text-lg font-semibold text-white mb-4">Dokumenty</h3>
             <ul className="space-y-2">
@@ -65,7 +65,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Kolumna 4: ZMIANA - dodano md:text-right */}
+          {/* Kolumna 4: Kontakt */}
           <div className="flex flex-col items-center md:items-end md:text-right">
             <h3 className="text-lg font-semibold text-white mb-4">Kontakt</h3>
             <div className="space-y-2">
@@ -75,13 +75,33 @@ const Footer = () => {
               </a>
             </div>
             <div className="flex gap-4 mt-6">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-primary-400 transition-colors duration-200">
+              <a 
+                href="https://www.instagram.com/biotywacja/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram" 
+                className="hover:text-primary-400 transition-colors duration-200"
+              >
                 <Instagram size={24} />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-primary-400 transition-colors duration-200">
+              
+              <a 
+                href="https://www.facebook.com/people/Biotywacja/100093248691929/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook" 
+                className="hover:text-primary-400 transition-colors duration-200"
+              >
                 <Facebook size={24} />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-primary-400 transition-colors duration-200">
+
+              <a 
+                href="https://www.youtube.com/channel/UCLpcFe4LoCVbdYQvOhHKxSQ" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube" 
+                className="hover:text-primary-400 transition-colors duration-200"
+              >
                 <Youtube size={24} />
               </a>
             </div>

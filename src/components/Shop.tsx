@@ -53,7 +53,7 @@ const Shop = () => {
             absolute bottom-0 left-0 
             w-[200%] h-40
             bg-white/35 backdrop-blur-sm 
-            rotate-[-32deg]
+            rotate-[-30deg]
             origin-bottom-left
           "
         />

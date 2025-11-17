@@ -39,8 +39,7 @@ const PolitykaCookiesPage = () => {
 
       <h2>§ 6. Kontakt</h2>
       <p>
-        W sprawach związanych z polityką cookies prosimy o kontakt:  
-        <strong>kontakt@biotywacja.pl</strong>
+        W sprawach związanych z polityką cookies prosimy o kontakt: <strong>biotywacja@gmail.com</strong>
       </p>
 
     </LegalWrapper>

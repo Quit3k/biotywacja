@@ -14,8 +14,8 @@ const PolitykaPrywatnosciPage = () => {
         przekazywanych przez użytkowników w związku z korzystaniem ze strony internetowej Biotywacja.
       </p>
       <p>
-        Administratorem danych osobowych jest <strong>Monika Kaput</strong>.  
-        Kontakt: <strong>kontakt@biotywacja.pl</strong>.
+        Administratorem danych osobowych jest <strong>Monika Kaput-Gustek</strong>.
+        Kontakt: <strong>biotywacja@gmail.com</strong>.
       </p>
 
       <h2>§ 2. Zakres przetwarzanych danych</h2>
@@ -56,8 +56,7 @@ const PolitykaPrywatnosciPage = () => {
 
       <h2>§ 7. Kontakt</h2>
       <p>
-        W sprawach dotyczących danych osobowych prosimy o kontakt:  
-        <strong>kontakt@biotywacja.pl</strong>
+        W sprawach dotyczących danych osobowych prosimy o kontakt: <strong>biotywacja@gmail.com</strong>
       </p>
 
     </LegalWrapper>

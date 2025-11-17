@@ -71,7 +71,7 @@ const Footer = () => {
             <div className="space-y-2">
               <a href="mailto:kontakt@biotywacja.pl" className="flex items-center justify-center md:justify-end gap-2 hover:text-primary-400 transition-colors duration-200">
                 <Mail size={16} />
-                <span>kontakt@biotywacja.pl</span>
+                <span>biotywacja@gmail.com</span>
               </a>
             </div>
             <div className="flex gap-4 mt-6">
